@@ -47,6 +47,7 @@ RUN go version
 #    | tar -C /usr/local/bin -xz
 #    # Install docker-gen
 RUN  go get -v -d github.com/BurntSushi/toml
+RUN  go get -v -d golang.org/x/net
 
 RUN git clone https://github.com/jwilder/docker-gen.git \
  && cd docker-gen \
