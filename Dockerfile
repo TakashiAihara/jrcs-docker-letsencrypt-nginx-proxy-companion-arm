@@ -35,7 +35,7 @@ RUN wget https://dl.google.com/go/go${GO_VERSION}.linux-arm64.tar.gz \
 
 ENV PATH=$PATH:/usr/local/go/bin
 
-RUN env
+RUN go
 
 # Install docker-gen
 #RUN curl -L https://github.com/jwilder/docker-gen/releases/download/${DOCKER_GEN_VERSION}/docker-gen-alpine-linux-armhf-${DOCKER_GEN_VERSION}.tar.gz \
