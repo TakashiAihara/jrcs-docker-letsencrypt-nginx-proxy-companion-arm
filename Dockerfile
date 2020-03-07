@@ -21,6 +21,7 @@ RUN apk add --update \
         ca-certificates \
         curl \
         jq \
+        git \
         openssl \
     && rm /var/cache/apk/*
 
