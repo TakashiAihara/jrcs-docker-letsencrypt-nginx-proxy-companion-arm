@@ -47,11 +47,13 @@ RUN go version
 #    | tar -C /usr/local/bin -xz
 #    # Install docker-gen
 
+RUN pwd
 RUN git clone https://github.com/jwilder/docker-gen.git \
  && cd docker-gen 
+RUN pwd
 RUN  go get -v -d github.com/BurntSushi/toml
+RUN pwd
 RUN  go get -v -d golang.org/x/net
-RUN ls -lta
 RUN pwd
 #RUN make get-deps \
 RUN make 
