@@ -23,6 +23,8 @@ RUN apk add --update \
         jq \
         git \
         openssl \
+        make \
+        gcc \
     && rm /var/cache/apk/*
 
 # Install docker-gen
