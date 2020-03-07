@@ -51,6 +51,8 @@ RUN git clone https://github.com/jwilder/docker-gen.git \
  && cd docker-gen 
 RUN  go get -v -d github.com/BurntSushi/toml
 RUN  go get -v -d golang.org/x/net
+RUN ls -lta
+RUN pwd
 #RUN make get-deps \
 RUN make 
 
