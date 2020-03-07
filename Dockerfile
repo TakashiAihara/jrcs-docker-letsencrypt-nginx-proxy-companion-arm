@@ -52,6 +52,7 @@ RUN cd docker-gen \
 && go get -v -d github.com/BurntSushi/toml \
 && go get -v -d golang.org/x/net \
 #&& make get-deps \
+&& go mod init \
 && make 
 
 # Install simp_le
