@@ -25,7 +25,9 @@ RUN apk add --update \
         openssl \
         make \
         gcc \
+        --no-cache vim musl-dev go \
     && rm /var/cache/apk/*
+RUN apk add --update 
 
 ENV GO_VERSION 1.14
 
@@ -33,9 +35,13 @@ RUN wget https://dl.google.com/go/go${GO_VERSION}.linux-arm64.tar.gz \
   && tar -C /usr/local -xzf go${GO_VERSION}.linux-arm64.tar.gz \
   && rm go${GO_VERSION}.linux-arm64.tar.gz
 
-ENV PATH=$PATH:/usr/local/go/bin
-
-RUN go
+# Configure Go
+ENV GOPATH=/root/go
+ENV PATH=${GOPATH}/bin:/usr/local/go/bin:$PATH
+ENV GOBIN=$GOROOT/bin
+RUN mkdir -p ${GOPATH}/src ${GOPATH}/bin
+ENV GO111MODULE=on
+RUN go version
 
 # Install docker-gen
 #RUN curl -L https://github.com/jwilder/docker-gen/releases/download/${DOCKER_GEN_VERSION}/docker-gen-alpine-linux-armhf-${DOCKER_GEN_VERSION}.tar.gz \
