@@ -47,16 +47,12 @@ RUN go version
 #    | tar -C /usr/local/bin -xz
 #    # Install docker-gen
 
-RUN pwd
-RUN git clone https://github.com/jwilder/docker-gen.git \
- && cd docker-gen 
-RUN pwd
-RUN  go get -v -d github.com/BurntSushi/toml
-RUN pwd
-RUN  go get -v -d golang.org/x/net
-RUN pwd
-#RUN make get-deps \
-RUN make 
+RUN git clone https://github.com/jwilder/docker-gen.git
+RUN cd docker-gen \
+&& go get -v -d github.com/BurntSushi/toml \
+&& go get -v -d golang.org/x/net \
+&& make get-deps \
+&& make 
 
 # Install simp_le
 COPY --from=builder /docker-letsencrypt-nginx-proxy-companion/install_simp_le.sh /app/install_simp_le.sh
