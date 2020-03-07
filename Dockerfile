@@ -16,7 +16,7 @@ ENV DEBUG=false \
     DOCKER_HOST=unix:///var/run/docker.sock
 
 # Install packages required by the image
-RUN apk add --update \
+RUN apk add --update --no-cache \
         bash \
         ca-certificates \
         curl \
@@ -25,8 +25,7 @@ RUN apk add --update \
         openssl \
         make \
         gcc \
-        --no-cache vim musl-dev go \
-    && rm /var/cache/apk/*
+        vim musl-dev go
 RUN apk add --update 
 
 ENV GO_VERSION 1.14
