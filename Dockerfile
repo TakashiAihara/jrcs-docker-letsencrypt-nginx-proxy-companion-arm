@@ -46,12 +46,12 @@ RUN go version
 #RUN curl -L https://github.com/jwilder/docker-gen/releases/download/${DOCKER_GEN_VERSION}/docker-gen-alpine-linux-armhf-${DOCKER_GEN_VERSION}.tar.gz \
 #    | tar -C /usr/local/bin -xz
 #    # Install docker-gen
-RUN  go get -v -d github.com/BurntSushi/toml
-RUN  go get -v -d golang.org/x/net
 
 RUN git clone https://github.com/jwilder/docker-gen.git \
- && cd docker-gen \
- && make get-deps \
+ && cd docker-gen 
+RUN  go get -v -d github.com/BurntSushi/toml
+RUN  go get -v -d golang.org/x/net
+RUN make get-deps \
  && make
 
 # Install simp_le
