@@ -1,4 +1,4 @@
-FROM arm32v6/alpine as builder
+FROM arm64v8/alpine as builder
 
 RUN apk add --update \
         openssl \
@@ -6,14 +6,10 @@ RUN apk add --update \
     && rm /var/cache/apk/*
 
 
-ENV LETS_ENCRYPT_VERSION "v1.8"
-RUN git clone --branch ${LETS_ENCRYPT_VERSION} https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion.git /docker-letsencrypt-nginx-proxy-companion
+RUN git clone https://github.com/nginx-proxy/docker-letsencrypt-nginx-proxy-companion.git /docker-letsencrypt-nginx-proxy-companion
 
 
-
-FROM arm32v6/alpine
-
-LABEL maintainer="Yves Blusseau <90z7oey02@sneakemail.com> (@blusseau)"
+FROM arm64v8/alpine
 
 ENV DEBUG=false \
     DOCKER_GEN_VERSION=0.7.4 \
@@ -29,8 +25,13 @@ RUN apk add --update \
     && rm /var/cache/apk/*
 
 # Install docker-gen
-RUN curl -L https://github.com/jwilder/docker-gen/releases/download/${DOCKER_GEN_VERSION}/docker-gen-alpine-linux-armhf-${DOCKER_GEN_VERSION}.tar.gz \
-    | tar -C /usr/local/bin -xz
+#RUN curl -L https://github.com/jwilder/docker-gen/releases/download/${DOCKER_GEN_VERSION}/docker-gen-alpine-linux-armhf-${DOCKER_GEN_VERSION}.tar.gz \
+#    | tar -C /usr/local/bin -xz
+#    # Install docker-gen
+RUN git clone https://github.com/jwilder/docker-gen.git \
+ && cd docker-gen \
+ && make get-deps \
+ && make
 
 # Install simp_le
 COPY --from=builder /docker-letsencrypt-nginx-proxy-companion/install_simp_le.sh /app/install_simp_le.sh
