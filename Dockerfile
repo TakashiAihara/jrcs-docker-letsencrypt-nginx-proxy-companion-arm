@@ -51,8 +51,8 @@ RUN git clone https://github.com/jwilder/docker-gen.git \
  && cd docker-gen 
 RUN  go get -v -d github.com/BurntSushi/toml
 RUN  go get -v -d golang.org/x/net
-RUN make get-deps \
- && make
+#RUN make get-deps \
+RUN make 
 
 # Install simp_le
 COPY --from=builder /docker-letsencrypt-nginx-proxy-companion/install_simp_le.sh /app/install_simp_le.sh
