@@ -51,7 +51,7 @@ RUN git clone https://github.com/jwilder/docker-gen.git
 RUN cd docker-gen \
 && go get -v -d github.com/BurntSushi/toml \
 && go get -v -d golang.org/x/net \
-&& make get-deps \
+#&& make get-deps \
 && make 
 
 # Install simp_le
